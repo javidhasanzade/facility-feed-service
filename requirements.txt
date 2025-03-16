@@ -1,0 +1,5 @@
+asyncpg
+aioboto3
+aiofiles  # If you plan to handle file I/O asynchronously
+pytest    # For testing
+flake8    # For linting
