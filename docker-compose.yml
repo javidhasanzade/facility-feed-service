@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  service:
+    build: .
+    environment:
+      DATABASE_URL: postgres://user:password@db:5432/postgres
+      AWS_REGION: eu-central-1
+      S3_BUCKET: your-s3-bucket-name
+      AWS_ACCESS_KEY_ID: your_access_key
+      AWS_SECRET_ACCESS_KEY: your_secret_key
+    depends_on:
+      - db
+    # command: ["./wait-for-it.sh", "db:5432", "--", "python", "src/main.py"]
+
+volumes:
+  postgres_data:

@@ -1,16 +1,18 @@
-# This is a sample Python script.
+import asyncio
+from src.config import settings
+from src.database import fetch_facilities_in_chunks
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+async def main():
+    print("Starting service with the following configuration:")
+    print(f"Database URL: {settings.DATABASE_URL}")
+    print(f"AWS Region: {settings.AWS_REGION}")
+    print(f"S3 Bucket: {settings.S3_BUCKET}")
+    print("Fetching data from the database...")
 
+    # Fetch and process the first chunk for demonstration purposes.
+    async for chunk in fetch_facilities_in_chunks():
+        print(f"Fetched a chunk with {len(chunk)} records.")
+        break
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    asyncio.run(main())
