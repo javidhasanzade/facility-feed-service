@@ -5,6 +5,7 @@ from src.file_manager import generate_feed_file, generate_metadata_file
 from src.s3_uploader import upload_file_to_s3
 import os
 
+
 async def main():
     print("Starting service...")
     feed_files = []

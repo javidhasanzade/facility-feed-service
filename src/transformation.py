@@ -3,7 +3,8 @@ def transform_records_to_json(records):
     Transforms a list of facility records into the JSON feed format.
 
     Each record is expected to have the following fields:
-    id, name, phone, url, latitude, longitude, country, locality, region, postal_code, street_address
+    id, name, phone, url, latitude, longitude, country,
+    locality, region, postal_code, street_address
 
     Returns a dictionary in the format:
     {

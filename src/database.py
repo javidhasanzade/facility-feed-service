@@ -1,6 +1,7 @@
 import asyncpg
 from src.config import settings
 
+
 async def fetch_facilities_in_chunks(chunk_size: int = settings.CHUNK_SIZE):
     """
     Connects to the PostgreSQL database, fetches facility records,
