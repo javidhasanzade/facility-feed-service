@@ -10,8 +10,8 @@ async def fetch_facilities_in_chunks(chunk_size: int = settings.CHUNK_SIZE):
     conn = await asyncpg.connect(settings.DATABASE_URL)
     try:
         query = """
-            SELECT 
-                id, name, phone, url, latitude, longitude, 
+            SELECT
+                id, name, phone, url, latitude, longitude,
                 country, locality, region, postal_code, street_address
             FROM facility;
         """
