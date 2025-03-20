@@ -25,14 +25,3 @@ async def fetch_facilities_in_chunks(chunk_size: int = settings.CHUNK_SIZE):
             yield records_chunk
     finally:
         await conn.close()
-
-# For quick testing of database connection:
-if __name__ == "__main__":
-    import asyncio
-
-    async def test_db_fetch():
-        async for chunk in fetch_facilities_in_chunks():
-            print(f"Retrieved a chunk of size: {len(chunk)}")
-            break
-
-    asyncio.run(test_db_fetch())

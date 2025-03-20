@@ -9,9 +9,8 @@ class Settings(BaseSettings):
 
     # AWS S3 configuration
     AWS_REGION: str = "eu-central-1"
-    S3_BUCKET: str = "reservewithgoogle-entity-dev-usw2"
+    S3_BUCKET: str = "facility-feed-service"
 
-    # AWS credentials (for local testing; production should use IAM roles)
     AWS_ACCESS_KEY_ID: str = ""
     AWS_SECRET_ACCESS_KEY: str = ""
 

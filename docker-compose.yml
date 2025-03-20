@@ -17,9 +17,9 @@ services:
     environment:
       DATABASE_URL: postgres://user:password@db:5432/postgres
       AWS_REGION: eu-central-1
-      S3_BUCKET: your-s3-bucket-name
-      AWS_ACCESS_KEY_ID: your_access_key
-      AWS_SECRET_ACCESS_KEY: your_secret_key
+      S3_BUCKET: facility-feed-service
+      AWS_ACCESS_KEY_ID:
+      AWS_SECRET_ACCESS_KEY:
     depends_on:
       - db
     # command: ["./wait-for-it.sh", "db:5432", "--", "python", "src/main.py"]
