@@ -44,5 +44,6 @@ def generate_metadata_file(feed_files, output_dir="output"):
         logger.info("Generated metadata file", extra={"file_path": file_path})
         return filename
     except Exception as e:
-        logger.exception("Error generating metadata file", extra={"error": str(e)})
+        logger.exception("Error generating metadata file",
+                         extra={"error": str(e)})
         raise

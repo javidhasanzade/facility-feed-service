@@ -2,6 +2,7 @@ from src.logger import setup_logger
 
 logger = setup_logger("transformation")
 
+
 def transform_records_to_json(records):
     """
     Transforms a list of facility records into the JSON feed format.
@@ -27,7 +28,8 @@ def transform_records_to_json(records):
                 }
             }
             data.append(facility)
-        logger.info("Transformation complete", extra={"record_count": len(data)})
+        logger.info("Transformation complete",
+                    extra={"record_count": len(data)})
         return {"data": data}
     except Exception as e:
         logger.exception("Error in transformation", extra={"error": str(e)})

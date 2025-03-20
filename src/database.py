@@ -4,6 +4,7 @@ from src.logger import setup_logger
 
 logger = setup_logger("database")
 
+
 async def fetch_facilities_in_chunks(chunk_size: int = settings.CHUNK_SIZE):
     conn = await asyncpg.connect(settings.DATABASE_URL)
     try:
@@ -17,7 +18,8 @@ async def fetch_facilities_in_chunks(chunk_size: int = settings.CHUNK_SIZE):
             async for record in conn.cursor(query):
                 records_chunk.append(record)
                 if len(records_chunk) >= chunk_size:
-                    logger.info("Yielding a chunk", extra={"chunk_size": len(records_chunk)})
+                    logger.info("Yielding a chunk",
+                                extra={"chunk_size": len(records_chunk)})
                     yield records_chunk
                     records_chunk = []
         if records_chunk:

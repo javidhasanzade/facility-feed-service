@@ -11,7 +11,8 @@ logger = setup_logger("main")
 
 
 async def main():
-    logger.info("Starting service", extra={"database_url": settings.DATABASE_URL})
+    logger.info("Starting service",
+                extra={"database_url": settings.DATABASE_URL})
     feed_files = []
 
     try:
@@ -37,7 +38,8 @@ async def main():
             await upload_file_to_s3(file_path, file)
 
     except Exception as e:
-        logger.exception("An error occurred during execution", extra={"error": str(e)})
+        logger.exception("An error occurred during execution",
+                         extra={"error": str(e)})
 
 
 if __name__ == "__main__":

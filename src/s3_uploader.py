@@ -4,6 +4,7 @@ from src.logger import setup_logger
 
 logger = setup_logger("s3_uploader")
 
+
 async def upload_file_to_s3(file_path: str, key: str):
     """
     Uploads a file to AWS S3.
@@ -23,7 +24,9 @@ async def upload_file_to_s3(file_path: str, key: str):
                     ContentType="application/json",
                     ContentEncoding="gzip"
                 )
-        logger.info("Uploaded file to S3", extra={"file_path": file_path, "key": key})
+        logger.info("Uploaded file to S3",
+                    extra={"file_path": file_path, "key": key})
     except Exception as e:
-        logger.exception("Error uploading file to S3", extra={"file_path": file_path, "error": str(e)})
+        logger.exception("Error uploading file to S3",
+                         extra={"file_path": file_path, "error": str(e)})
         raise
