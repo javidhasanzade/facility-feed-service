@@ -46,8 +46,8 @@ jobs:
 
       - name: Tag Docker Image
         run: |
-          docker tag my-service:latest ${{ secrets.AWS_ECR_REGISTRY }}/my-service:latest
+          docker tag my-service:latest ${{ secrets.AWS_ECR_REGISTRY }}:latest
 
       - name: Push Docker Image to AWS ECR
         run: |
-          docker push ${{ secrets.AWS_ECR_REGISTRY }}/my-service:latest
+          docker push ${{ secrets.AWS_ECR_REGISTRY }}:latest
