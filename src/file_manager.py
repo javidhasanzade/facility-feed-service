@@ -2,13 +2,15 @@ import os
 import time
 import gzip
 import json
+from typing import Dict, List
+
 from src.config import settings
 from src.logger import setup_logger
 
 logger = setup_logger("file_manager")
 
 
-def generate_feed_file(feed_json, output_dir="output"):
+def generate_feed_file(feed_json: Dict, output_dir="output") -> str:
     """
     Writes feed_json to a gzip-compressed JSON file.
     """
@@ -26,7 +28,7 @@ def generate_feed_file(feed_json, output_dir="output"):
         raise
 
 
-def generate_metadata_file(feed_files, output_dir="output"):
+def generate_metadata_file(feed_files: List[str], output_dir="output") -> str:
     """
     Creates a metadata file listing all generated feed files.
     """

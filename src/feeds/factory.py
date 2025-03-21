@@ -1,7 +1,9 @@
+from typing import Dict
+
 from src.feeds.reserve_with_google_feed import ReserveWithGoogleTransformer
 from src.feeds.base import FeedTransformer
 
-FEED_TRANSFORMERS = {
+FEED_TRANSFORMERS: Dict[str, type[FeedTransformer]] = {
     "reservewithgoogle.entity": ReserveWithGoogleTransformer,
     # "other.feed.name": OtherTransformer,
 }

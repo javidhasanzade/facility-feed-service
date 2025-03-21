@@ -5,7 +5,7 @@ from src.logger import setup_logger
 logger = setup_logger("s3_uploader")
 
 
-async def upload_file_to_s3(file_path: str, key: str):
+async def upload_file_to_s3(file_path: str, key: str) -> None:
     """
     Uploads a file to AWS S3.
     """
