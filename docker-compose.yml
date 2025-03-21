@@ -20,7 +20,7 @@ services:
       AWS_SECRET_ACCESS_KEY:
     depends_on:
       - db
-    # command: ["./wait-for-it.sh", "db:5432", "--", "python", "src/main.py"]
+    command: ["./wait-for-it.sh", "db:5432", "--", "python", "src/main.py"]
 
 volumes:
   postgres_data:
