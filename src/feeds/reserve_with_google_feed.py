@@ -1,15 +1,8 @@
-# Old transformation file
-
-from src.logger import setup_logger
-
-logger = setup_logger("transformation")
+from src.feeds.base import FeedTransformer
 
 
-def transform_records_to_json(records):
-    """
-    Transforms a list of facility records into the JSON feed format.
-    """
-    try:
+class ReserveWithGoogleTransformer(FeedTransformer):
+    def transform(self, records: list) -> dict:
         data = []
         for record in records:
             facility = {
@@ -30,9 +23,4 @@ def transform_records_to_json(records):
                 }
             }
             data.append(facility)
-        logger.info("Transformation complete",
-                    extra={"record_count": len(data)})
         return {"data": data}
-    except Exception as e:
-        logger.exception("Error in transformation", extra={"error": str(e)})
-        raise
