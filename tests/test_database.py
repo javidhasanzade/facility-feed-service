@@ -1,5 +1,4 @@
 import pytest
-import asyncio
 from src.database import fetch_facilities_in_chunks
 
 
@@ -15,12 +14,15 @@ class FakeCursor:
         for record in self.records:
             yield record
 
+
 # Fake transaction context manager.
 class FakeTransaction:
     async def __aenter__(self):
         return self
+
     async def __aexit__(self, exc_type, exc, tb):
         pass
+
 
 # Fake connection mimicking asyncpg's behavior.
 class FakeConnection:
@@ -36,6 +38,7 @@ class FakeConnection:
 
     async def close(self):
         pass
+
 
 # Fake connect functions for various scenarios.
 async def fake_connect_success(database_url):
@@ -56,8 +59,10 @@ async def fake_connect_success(database_url):
     ]
     return FakeConnection(sample_records)
 
+
 async def fake_connect_empty(database_url):
     return FakeConnection([])
+
 
 async def fake_connect_error(database_url):
     sample_records = [
@@ -77,6 +82,7 @@ async def fake_connect_error(database_url):
     ]
     return FakeConnection(sample_records, raise_error=True)
 
+
 @pytest.mark.asyncio
 async def test_fetch_facilities_in_chunks_success(monkeypatch):
     monkeypatch.setattr("asyncpg.connect", fake_connect_success)
@@ -89,6 +95,7 @@ async def test_fetch_facilities_in_chunks_success(monkeypatch):
     assert record["id"] == 1
     assert record["name"] == "Test Facility"
 
+
 @pytest.mark.asyncio
 async def test_fetch_facilities_in_chunks_empty(monkeypatch):
     monkeypatch.setattr("asyncpg.connect", fake_connect_empty)
@@ -97,6 +104,7 @@ async def test_fetch_facilities_in_chunks_empty(monkeypatch):
         chunks.append(chunk)
     # With no records, nothing should be yielded.
     assert len(chunks) == 0
+
 
 @pytest.mark.asyncio
 async def test_fetch_facilities_in_chunks_error(monkeypatch):

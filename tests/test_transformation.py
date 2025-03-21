@@ -23,10 +23,12 @@ def test_transform_records_normal():
     assert isinstance(result["data"], list)
     assert result["data"][0]["entity_id"] == "dining-1"
 
+
 def test_transform_records_empty():
     result = transform_records_to_json([])
     assert "data" in result
     assert result["data"] == []
+
 
 def test_transform_records_missing_field():
     # Simulate a record missing the 'name' field.
