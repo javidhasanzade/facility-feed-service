@@ -17,6 +17,7 @@ def test_generate_feed_file_success():
             data = json.load(f)
         assert data == sample_feed
 
+
 def test_generate_metadata_file_success():
     feed_files = ["feed1.json.gz", "feed2.json.gz"]
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -29,10 +30,12 @@ def test_generate_metadata_file_success():
         assert data["name"]
         assert data["data_file"] == feed_files
 
+
 def test_generate_feed_file_error(monkeypatch):
     # Force os.makedirs to raise an OSError.
     monkeypatch.setattr(os, "makedirs",
-                        lambda path, exist_ok: (_ for _ in ()).throw(OSError("Fake error")))
+                        lambda path, exist_ok: (_ for _ in ())
+                        .throw(OSError("Fake error")))
     sample_feed = {"data": [{"entity_id": "dining-1",
                              "name": "Test Facility"}]}
     with pytest.raises(OSError, match="Fake error"):
@@ -41,6 +44,7 @@ def test_generate_feed_file_error(monkeypatch):
 
 def test_generate_metadata_file_error(monkeypatch):
     monkeypatch.setattr(os, "makedirs",
-                        lambda path, exist_ok: (_ for _ in ()).throw(OSError("Fake error")))
+                        lambda path, exist_ok: (_ for _ in ())
+                        .throw(OSError("Fake error")))
     with pytest.raises(OSError, match="Fake error"):
         generate_metadata_file(["feed1.json.gz"], output_dir="dummy_dir")
