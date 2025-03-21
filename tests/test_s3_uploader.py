@@ -20,7 +20,8 @@ class FakeSession:
 
 
 def create_dummy_session(**kwargs):
-    return type("DummySession", (), {"client": lambda self, service: FakeSession()})()
+    return type("DummySession", (),
+                {"client": lambda self, service: FakeSession()})()
 
 
 @pytest.mark.asyncio
@@ -33,7 +34,8 @@ async def test_upload_file_to_s3_success(tmp_path, monkeypatch):
         json.dump(sample_data, f)
 
     # Monkeypatch aioboto3.Session to return an instance of FakeSession.
-    monkeypatch.setattr("src.s3_uploader.aioboto3.Session", create_dummy_session)
+    monkeypatch.setattr("src.s3_uploader.aioboto3.Session",
+                        create_dummy_session)
 
     # This should complete without raising exceptions.
     await upload_file_to_s3(str(temp_file), "test_key.json.gz")
@@ -48,7 +50,8 @@ async def test_upload_file_to_s3_error(tmp_path, monkeypatch):
     with gzip.open(temp_file, "wt", encoding="utf-8") as f:
         json.dump(sample_data, f)
 
-    monkeypatch.setattr("src.s3_uploader.aioboto3.Session", create_dummy_session)
+    monkeypatch.setattr("src.s3_uploader.aioboto3.Session",
+                        create_dummy_session)
 
     # Verify that the exception is raised.
     with pytest.raises(Exception, match="Fake S3 error"):
