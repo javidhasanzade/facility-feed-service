@@ -6,6 +6,7 @@ FEED_TRANSFORMERS = {
     # "other.feed.name": OtherTransformer,
 }
 
+
 def get_transformer(feed_name: str) -> FeedTransformer:
     transformer_cls = FEED_TRANSFORMERS.get(feed_name)
     if not transformer_cls:
