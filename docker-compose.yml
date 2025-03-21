@@ -1,21 +1,19 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:13-alpine
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+      POSTGRES_DB: facility
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
 
-  service:
+  app:
     build: .
     environment:
-      DATABASE_URL: postgres://user:password@db:5432/postgres
+      DATABASE_URL: postgres://user:password@db:5432/facility
       AWS_REGION: eu-central-1
       S3_BUCKET: facility-feed-service
       AWS_ACCESS_KEY_ID:
